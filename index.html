@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEADZONE — DayZ Deer Isle Portal</title>
+<title>[BR] RIO DEAD ZONE — Sobrevivência Deer Isle</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
 
   :root {
-    --bg: #050608;
-    --surface: #0f1116;
-    --border: #1e2230;
-    --accent: #e8a020;
-    --accent-dark: #b87d14;
-    --text: #c8ccd8;
-    --green: #3ddc84;
-    --red: #ff4d4d;
+    --bg: #06090f; /* Azul quase preto */
+    --surface: #0d121a; /* Cinza azulado profundo */
+    --border: #1a2433; /* Bordas metálicas frias */
+    --accent: #4ecdc4; /* Ciano/Turquesa fosco (Sobriedade) */
+    --accent-dark: #2a7a74;
+    --text: #aab8c2; /* Texto acinzentado */
+    --green: #45b07a;
+    --discord: #5865f2;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; scroll-behavior: smooth; }
@@ -30,7 +30,7 @@
 
   /* --- NAVEGAÇÃO --- */
   nav {
-    background: rgba(10, 12, 16, 0.95);
+    background: rgba(6, 9, 15, 0.9);
     border-bottom: 1px solid var(--border);
     padding: 15px 5%;
     display: flex;
@@ -39,31 +39,32 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
   }
 
-  .logo { font-family: 'Orbitron'; color: var(--accent); font-weight: 900; font-size: 1.5rem; text-decoration: none; }
+  .logo { font-family: 'Orbitron'; color: var(--accent); font-weight: 900; font-size: 1.4rem; text-decoration: none; letter-spacing: 2px; }
 
-  .nav-links { display: flex; gap: 25px; }
   .nav-links a { 
     text-decoration: none; 
     color: var(--text); 
     font-family: 'Orbitron'; 
-    font-size: 0.8rem; 
+    font-size: 0.75rem; 
     text-transform: uppercase;
+    margin-left: 20px;
     transition: 0.3s;
   }
   .nav-links a:hover { color: var(--accent); }
 
   /* --- HERO SECTION --- */
   .hero {
-    height: 80vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(5,6,8,1)), url('https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Imagem de fundo temporária */
+    /* Gradiente que simula neblina de Deer Isle */
+    background: linear-gradient(rgba(6, 9, 15, 0.4), rgba(6, 9, 15, 1)), url('https://i.imgur.com/vH6QeM8.jpg'); 
     background-size: cover;
     background-position: center;
     padding: 20px;
@@ -71,208 +72,174 @@
 
   .hero h1 { 
     font-family: 'Orbitron'; 
-    font-size: 4rem; 
-    color: var(--accent); 
-    margin-bottom: 10px;
-    letter-spacing: 10px;
-    text-shadow: 0 0 30px rgba(232, 160, 32, 0.5);
+    font-size: clamp(2.5rem, 8vw, 4.5rem); 
+    color: #fff; 
+    margin-bottom: 5px;
+    letter-spacing: 12px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   }
 
-  /* --- SEÇÕES --- */
+  .hero p { 
+    font-family: 'Orbitron'; 
+    letter-spacing: 6px; 
+    color: var(--accent); 
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    opacity: 0.8;
+  }
+
+  /* --- SEÇÕES SÓBRIAS --- */
   section { padding: 80px 10% 40px; }
   h2.section-title { 
     font-family: 'Orbitron'; 
-    color: var(--accent); 
+    color: #fff; 
     margin-bottom: 40px; 
-    border-left: 5px solid var(--accent); 
+    border-left: 3px solid var(--accent); 
     padding-left: 15px;
     text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 1.5rem;
   }
 
-  /* --- REGRAS --- */
-  .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-  .rule-card { 
+  .info-box { 
     background: var(--surface); 
     border: 1px solid var(--border); 
-    padding: 20px; 
-    border-radius: 10px;
+    padding: 30px; 
+    border-radius: 4px; /* Menos arredondado para parecer mais militar/sóbrio */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .info-item label { display: block; font-family: 'Orbitron'; color: var(--accent); font-size: 0.7rem; margin-bottom: 5px; }
+  .info-item p { font-size: 1.3rem; font-weight: 500; color: #fff; }
+
+  /* --- CARDS DA LOJA --- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .card { 
+    background: var(--surface); 
+    border: 1px solid var(--border); 
+    overflow: hidden; 
     transition: 0.3s;
   }
-  .rule-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-  .rule-card h3 { color: var(--accent); margin-bottom: 10px; font-family: 'Orbitron'; font-size: 1.1rem; }
-
-  /* --- INFOS --- */
-  .info-box { background: var(--surface); border: 1px solid var(--border); padding: 30px; border-radius: 15px; display: flex; flex-wrap: wrap; gap: 40px; }
-  .info-item { flex: 1; min-width: 200px; }
-  .info-item label { display: block; font-family: 'Orbitron'; color: var(--accent); font-size: 0.7rem; margin-bottom: 5px; }
-  .info-item p { font-size: 1.2rem; font-weight: bold; color: #fff; }
-
-  /* --- LOJA (GRID ORIGINAL) --- */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
-  .card:hover { border-color: var(--accent); transform: translateY(-8px); }
-  .card-img { width: 100%; height: 180px; overflow: hidden; background: #000; position: relative; }
-  .vehicle-img { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0.8; transition: 1s; }
-  .card-body { padding: 15px; flex-grow: 1; }
-  .price { font-size: 24px; font-weight: 700; color: var(--green); margin: 10px 0; font-family: 'Orbitron'; }
+  .card:hover { border-color: var(--accent); background: #111822; }
+  .card-img { width: 100%; height: 160px; background: #000; filter: grayscale(40%); }
+  .card-body { padding: 20px; }
+  .price { font-size: 22px; color: var(--accent); font-family: 'Orbitron'; margin: 10px 0; }
 
   /* --- BOTÕES --- */
   .btn { 
-    background: linear-gradient(45deg, var(--accent), var(--accent-dark)); 
-    border: none; padding: 12px 25px; border-radius: 6px; 
-    color: #000; font-weight: 900; font-family: 'Orbitron'; 
-    cursor: pointer; text-transform: uppercase; text-decoration: none; display: inline-block;
+    background: transparent;
+    border: 1px solid var(--accent);
+    padding: 12px 25px;
+    color: var(--accent);
+    font-family: 'Orbitron';
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
   }
-  .btn-shop { width: 100%; margin-top: 10px; }
+  .btn:hover { background: var(--accent); color: #000; }
+  .btn-discord { background: var(--discord); border: none; color: #fff; }
 
-  /* --- MODAL E CHECKOUT --- */
-  #payment-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; }
-  .modal-content { background: var(--surface); border: 2px solid var(--accent); padding: 25px; border-radius: 20px; max-width: 420px; width: 90%; text-align: center; }
-  .qr-box { width: 220px; height: 220px; margin: 15px auto; background: #fff; padding: 10px; border-radius: 10px; }
-  .qr-box img { width: 100%; height: 100%; }
+  /* --- MODAL --- */
+  #payment-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+  .modal-content { background: var(--surface); border: 1px solid var(--accent); padding: 30px; max-width: 400px; width: 90%; text-align: center; }
 
-  footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); margin-top: 60px; color: #555; }
-
-  @media (max-width: 768px) {
-    .hero h1 { font-size: 2.5rem; }
-    .nav-links { display: none; }
-  }
+  footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: #444; font-size: 0.8rem; }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="logo">DEADZONE</a>
+  <a href="#" class="logo">[BR] RIO DEAD ZONE</a>
   <div class="nav-links">
-    <a href="#home">Home</a>
     <a href="#info">Servidor</a>
     <a href="#regras">Regras</a>
-    <a href="#loja">Loja VIP</a>
-    <a href="https://discord.gg/SEU_CONVITE" target="_blank">Discord</a>
+    <a href="#loja">Loja</a>
+    <a href="https://discord.gg/WWqFWmXfX6" target="_blank" style="color: var(--discord);">Discord</a>
   </div>
 </nav>
 
 <section id="home" class="hero">
-  <h1>DEAD ZONE</h1>
-  <p style="font-family: 'Orbitron'; letter-spacing: 3px; color: var(--text);">SOBREVIVÊNCIA EXTREMA EM DEER ISLE</p>
-  <div style="margin-top: 30px;">
-    <a href="#loja" class="btn">Explorar Loja</a>
-    <a href="#regras" class="btn" style="background: transparent; border: 1px solid var(--accent); color: var(--accent); margin-left: 10px;">Ver Regras</a>
+  <h1>RIO DEAD ZONE</h1>
+  <p>DEER ISLE SURVIVAL</p>
+  <div>
+    <a href="#loja" class="btn">Equipamentos</a>
+    <a href="https://discord.gg/WWqFWmXfX6" target="_blank" class="btn btn-discord" style="margin-left: 10px;">Comunidade</a>
   </div>
 </section>
 
 <section id="info">
-  <h2 class="section-title">Informações do Servidor</h2>
+  <h2 class="section-title">Status do Sistema</h2>
   <div class="info-box">
-    <div class="info-item"><label>MAPA</label><p>Deer Isle</p></div>
-    <div class="info-item"><label>PERSPECTIVA</label><p>1PP / 3PP</p></div>
-    <div class="info-item"><label>IP DO SERVIDOR</label><p>192.168.0.1:2302</p></div>
-    <div class="info-item"><label>SLOTS</label><p>60 Jogadores</p></div>
+    <div class="info-item"><label>ENDEREÇO IP</label><p>188.255.171.140</p></div>
+    <div class="info-item"><label>PORTA</label><p>2312</p></div>
+    <div class="info-item"><label>LOCALIZAÇÃO</label><p>Deer Isle</p></div>
+    <div class="info-item"><label>MODO</label><p>Hardcore Survival</p></div>
   </div>
 </section>
 
 <section id="regras">
-  <h2 class="section-title">Regras de Sobrevivência</h2>
-  <div class="rules-grid">
-    <div class="rule-card">
-      <h3>01. Safe Zones</h3>
-      <p>Proibido roubar, matar ou causar dano dentro das áreas demarcadas como Safe Zone (Ex: Traders).</p>
+  <h2 class="section-title">Diretrizes de Campo</h2>
+  <div class="grid">
+    <div style="background: var(--surface); padding: 20px; border-left: 2px solid var(--accent);">
+      <h4 style="color: #fff; font-family: Orbitron; margin-bottom: 10px;">Zonas Seguras</h4>
+      <p style="font-size: 0.9rem;">Áreas de comércio são estritamente monitoradas. Hostilidade resultará em expulsão.</p>
     </div>
-    <div class="rule-card">
-      <h3>02. Construção</h3>
-      <p>Não construa em estradas principais ou bloqueando o acesso a POIs militares importantes.</p>
-    </div>
-    <div class="rule-card">
-      <h3>03. Raid de Base</h3>
-      <p>Raids são permitidos apenas aos finais de semana, das 18h de sexta às 23h de domingo.</p>
-    </div>
-    <div class="rule-card">
-      <h3>04. Respeito</h3>
-      <p>Toxicidade excessiva, racismo ou preconceito resultará em BAN imediato e sem aviso.</p>
+    <div style="background: var(--surface); padding: 20px; border-left: 2px solid var(--accent);">
+      <h4 style="color: #fff; font-family: Orbitron; margin-bottom: 10px;">Raids</h4>
+      <p style="font-size: 0.9rem;">Operações de invasão autorizadas apenas em períodos de guerra (Finais de Semana).</p>
     </div>
   </div>
 </section>
 
 <section id="loja">
-  <h2 class="section-title">Loja de Suprimentos VIP</h2>
-  <div id="shop-container" class="grid">
+  <h2 class="section-title">Suprimentos VIP</h2>
+  <div class="grid" id="shop-items">
     </div>
 </section>
 
 <div id="payment-modal">
   <div class="modal-content">
-    <h2 style="font-family: Orbitron; color: var(--accent);">CHECKOUT PIX</h2>
-    <div class="qr-box"><img src="pix.png" alt="QR Code PIX"></div>
-    <div class="pix-info" style="text-align: left; background: #000; padding: 15px; border-radius: 10px; margin: 15px 0;">
-      <label style="font-size: 10px; color: var(--accent);">CHAVE PIX (CPF):</label><br>
-      <span style="color:#fff;">123.982.156.52</span><br><br>
-      <label style="font-size: 10px; color: var(--accent);">BENEFICIÁRIO:</label><br>
-      <span style="color:#fff;">Alexandre Rodrigues Prates</span>
-    </div>
-    <button class="btn btn-shop" onclick="finalizePurchase()">Confirmar Pedido</button>
-    <button onclick="closeModal()" style="margin-top:15px; background:none; border:none; color:gray; cursor:pointer;">Cancelar</button>
+    <h3 style="color: var(--accent); font-family: Orbitron; margin-bottom: 20px;">TRANSFERÊNCIA PIX</h3>
+    <img src="pix.png" style="width: 200px; background: #fff; padding: 10px; margin-bottom: 20px;">
+    <p style="font-size: 0.8rem; color: #fff; margin-bottom: 5px;">CHAVE (CPF): 123.982.156.52</p>
+    <p style="font-size: 0.8rem; color: var(--accent);">BENEFICIÁRIO: Alexandre Rodrigues Prates</p>
+    <button class="btn" style="width: 100%; margin-top: 20px;" onclick="closeModal()">Fechar</button>
   </div>
 </div>
 
 <footer>
-  <p>&copy; 2026 DEADZONE [BR] - Deer Isle Survival. Desenvolvido para a comunidade.</p>
+  <p>[BR] RIO DEAD ZONE — 2026. Todos os direitos reservados à administração.</p>
 </footer>
 
 <script>
-const WEBHOOK_URL = "https://discord.com/api/webhooks/1473893978809307320/NwHArN7ef1WWYLoCxthPK7hZRIhlku4_at6qI80IJpUD6kWXuL9jbSswMGRXmvoxEtF_";
-let activeOrder = null;
+  const shopData = [
+    { name: "AH-64 Apache", price: "120,00", img: "apache1.png" },
+    { name: "UH-60 Blackhawk", price: "95,00", img: "blackhawk1.png" },
+    { name: "AS350 Esquilo", price: "80,00", img: "esquilo1.png" },
+    { name: "BTR-80 Camo", price: "120,00", img: "btr1.png" }
+  ];
 
-const items = [
-  { id: "RFFSHeli_Apache", name: "AH-64 Apache", price: "120,00", img: "apache1.png" },
-  { id: "RFFSHeli_AS350", name: "AS350 Esquilo", price: "80,00", img: "esquilo1.png" },
-  { id: "BTR80_Camo", name: "BTR-80 Camuflado", price: "120,00", img: "btr1.png" },
-  { id: "Base_Bunker", name: "Bunker Subterrâneo", price: "500,00", img: "bunker.png" }
-];
-
-function renderShop() {
-  const container = document.getElementById('shop-container');
-  items.forEach(i => {
-    container.innerHTML += `
+  const shopGrid = document.getElementById('shop-items');
+  shopData.forEach(item => {
+    shopGrid.innerHTML += `
       <div class="card">
-        <div class="card-img"><img src="${i.img}" class="vehicle-img"></div>
+        <div class="card-img"></div>
         <div class="card-body">
-          <span style="font-size:10px; color:var(--accent);">ID: ${i.id}</span>
-          <h3 style="font-family:Orbitron; margin-top:5px;">${i.name}</h3>
-          <div class="price">R$ ${i.price}</div>
-          <button class="btn btn-shop" onclick="openCheckout('${i.id}','${i.name}','${i.price}')">Adquirir</button>
+          <h4 style="color:#fff; font-family:Orbitron;">${item.name}</h4>
+          <p class="price">R$ ${item.price}</p>
+          <button class="btn" style="width:100%" onclick="openCheckout()">Adquirir</button>
         </div>
-      </div>`;
+      </div>
+    `;
   });
-}
 
-function openCheckout(id, name, price) {
-  const user = prompt("Seu nome no jogo:");
-  if (!user) return;
-  activeOrder = { user, id, name, price };
-  document.getElementById('payment-modal').style.display = 'flex';
-}
-
-async function finalizePurchase() {
-  const msg = { 
-    username: "DEAD ZONE SHOP", 
-    embeds: [{ 
-      title: "💰 NOVO PEDIDO", 
-      color: 15241731, 
-      fields: [
-        {name:"Jogador", value:activeOrder.user, inline:true},
-        {name:"Item", value:activeOrder.name, inline:true},
-        {name:"Preço", value:"R$ "+activeOrder.price, inline:true}
-      ] 
-    }] 
-  };
-  await fetch(WEBHOOK_URL, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(msg) });
-  alert("Pedido enviado! Envie o comprovante no Discord.");
-  closeModal();
-}
-
-function closeModal() { document.getElementById('payment-modal').style.display = 'none'; }
-
-window.onload = renderShop;
+  function openCheckout() { document.getElementById('payment-modal').style.display = 'flex'; }
+  function closeModal() { document.getElementById('payment-modal').style.display = 'none'; }
 </script>
+
 </body>
 </html>
