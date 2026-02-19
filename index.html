@@ -60,7 +60,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Orbitron';
-    font-size: 12px;
+    font-size: 11px;
     transition: 0.3s;
   }
 
@@ -84,7 +84,8 @@
     position: relative;
   }
 
-  /* ── SLIDE DE IMAGENS ── */
+  .card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+
   .card-img { 
     width: 100%; 
     height: 180px; 
@@ -109,15 +110,10 @@
     opacity: 0.8;
   }
 
-  .card:hover .vehicle-img.active {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-
   .card-body { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
   .id-badge { font-family: 'Orbitron'; font-size: 9px; color: var(--accent); letter-spacing: 1px; }
-  h3 { font-family: 'Orbitron'; font-size: 16px; margin: 5px 0 10px 0; color: #fff; }
-  .price { font-size: 24px; font-weight: 700; color: var(--green); margin-bottom: 15px; font-family: 'Orbitron'; }
+  h3 { font-family: 'Orbitron'; font-size: 15px; margin: 5px 0 10px 0; color: #fff; }
+  .price { font-size: 22px; font-weight: 700; color: var(--green); margin-bottom: 15px; font-family: 'Orbitron'; }
 
   .btn {
     background: linear-gradient(45deg, var(--accent), var(--accent2));
@@ -137,7 +133,7 @@
     padding-left: 15px; 
     margin: 40px 0 30px 0; 
     color: var(--accent);
-    letter-spacing: 2px;
+    text-transform: uppercase;
   }
 </style>
 </head>
@@ -146,7 +142,7 @@
 <div class="container">
   <header>
     <h1>DEAD ZONE VIP</h1>
-    <p style="color: var(--muted); margin-top: 10px;">LOJA AUTOMATIZADA COM MULTI-FOTOS</p>
+    <p style="color: var(--muted); margin-top: 10px;">LOJA AUTOMATIZADA — DEER ISLE</p>
   </header>
 
   <div class="nav-categories" id="menu-nav"></div>
@@ -154,6 +150,7 @@
 </div>
 
 <script>
+// CONFIGURAÇÕES
 const WEBHOOK_URL = "https://discord.com/api/webhooks/1473893978809307320/NwHArN7ef1WWYLoCxthPK7hZRIhlku4_at6qI80IJpUD6kWXuL9jbSswMGRXmvoxEtF_";
 
 const DISCORD_LINKS = {
@@ -163,26 +160,28 @@ const DISCORD_LINKS = {
   BASES: "https://discord.com/channels/1362584015273595183/1473883053821792410"
 };
 
+// BANCO DE DADOS COM NOMES DO SEU REPOSITÓRIO
 const database = [
   {
-    cat: "Helicópteros",
+    cat: "Helicópteros de Ataque",
     anchor: "HELIS",
     link: DISCORD_LINKS.HELIS,
     items: [
-      { 
-        id: "RFFSHeli_Apache", 
-        name: "AH-64 Apache", 
-        price: "100,00", 
-        // AQUI VOCÊ PODE COLOCAR VÁRIAS FOTOS
-        img: [
-          "https://cdn.discordapp.com/attachments/1362666391932764210/1470184490235334911/DayZ_08_02_2026_18_37_28.png?ex=69978e81&is=69963d01&hm=bd8802e4f54b77e8c6d3f7e7ed11db9eb08fe83aeb153e910f0bdfc3dce5e295&",
-          "SUA_SEGUNDA_FOTO_AQUI", 
-          "SUA_TERCEIRA_FOTO_AQUI"
-        ] 
-      },
-      { id: "RFFSHeli_Blackhawk", name: "UH-60 Blackhawk", price: "80,00", img: [] },
-      { id: "RFFSHeli_CH47", name: "CH-47 Chinook", price: "90,00", img: [] },
-      { id: "RFFSHeli_Bell429", name: "Bell 429", price: "60,00", img: [] }
+      { id: "RFFSHeli_Apache", name: "AH-64 Apache", price: "100,00", img: ["apache1.png", "apache2.png"] },
+      { id: "RFFSHeli_Blackhawk", name: "UH-60 Blackhawk", price: "80,00", img: ["blackhawk1.png"] },
+      { id: "RFFSHeli_CH47", name: "CH-47 Chinook", price: "90,00", img: ["chinook1.png"] },
+      { id: "RFFSHeli_CH53e", name: "CH-53E Super Stallion", price: "95,00", img: ["ch53.png"] }
+    ]
+  },
+  {
+    cat: "Helicópteros Utilitários",
+    anchor: "UTIL",
+    link: DISCORD_LINKS.HELIS,
+    items: [
+      { id: "RFFSHeli_Bell429", name: "Bell 429", price: "60,00", img: ["bell1.png"] },
+      { id: "RFFSHeli_AS350", name: "AS350 Esquilo", price: "55,00", img: ["esquilo1.png"] },
+      { id: "RFFSHeli_EC135", name: "EC135", price: "55,00", img: ["ec135.png"] },
+      { id: "RFFSHeli_Bo105m", name: "Bo105m", price: "45,00", img: ["bo105.png"] }
     ]
   },
   {
@@ -190,8 +189,10 @@ const database = [
     anchor: "CARROS",
     link: DISCORD_LINKS.CARROS,
     items: [
-      { id: "BTR80_Class", name: "BTR-80", price: "150,00", img: [] },
-      { id: "Humvee_Armored", name: "Humvee Militar", price: "70,00", img: [] }
+      { id: "BTR80_Camo", name: "BTR-80 Camuflado", price: "120,00", img: ["btr1.png"] },
+      { id: "BTR80_White", name: "BTR-80 White (Snow)", price: "120,00", img: ["btr_white.png"] },
+      { id: "HMMWV_Armored", name: "Humvee Blindado", price: "70,00", img: ["humvee1.png"] },
+      { id: "Tigre_Armored", name: "Gaz Tigre", price: "85,00", img: ["tigre1.png"] }
     ]
   },
   {
@@ -199,15 +200,8 @@ const database = [
     anchor: "BARCOS",
     link: DISCORD_LINKS.BARCOS,
     items: [
-      { id: "Boat_Zodiac", name: "Zodiac Militar", price: "35,00", img: [] }
-    ]
-  },
-  {
-    cat: "Bases e Kits",
-    anchor: "BASES",
-    link: DISCORD_LINKS.BASES,
-    items: [
-      { id: "Base_Bunker", name: "Bunker Subterrâneo", price: "500,00", img: [] }
+      { id: "Zodiac_Boat", name: "Zodiac Militar", price: "35,00", img: ["zodiac1.png"] },
+      { id: "Lancha_Luxo", name: "Lancha de Luxo", price: "50,00", img: ["lancha1.png"] }
     ]
   }
 ];
@@ -217,7 +211,6 @@ function renderShop() {
   const menu = document.getElementById('menu-nav');
 
   database.forEach(section => {
-    // Menu dinâmico
     menu.innerHTML += `<button class="nav-btn" onclick="document.getElementById('${section.anchor}').scrollIntoView()">${section.cat.toUpperCase()}</button>`;
 
     const div = document.createElement('section');
@@ -225,18 +218,18 @@ function renderShop() {
     div.innerHTML = `<h2>${section.cat}</h2><div class="grid">`;
     
     section.items.forEach(i => {
-      const imgList = i.img.length > 0 ? i.img : ["https://via.placeholder.com/400x220/111318/e8a020?text=AGUARDANDO+FOTO"];
+      const imgList = i.img.length > 0 ? i.img : ["https://via.placeholder.com/400x200/111318/e8a020?text=AGUARDANDO+FOTO"];
       
       div.querySelector('.grid').innerHTML += `
         <div class="card">
           <div class="card-img">
-            ${imgList.map((src, index) => `<img src="${src}" class="vehicle-img ${index === 0 ? 'active' : ''}" data-index="${index}">`).join('')}
+            ${imgList.map((src, idx) => `<img src="${src}" class="vehicle-img ${idx === 0 ? 'active' : ''}">`).join('')}
           </div>
           <div class="card-body">
-            <span class="id-badge">${i.id}</span>
+            <span class="id-badge">ID: ${i.id}</span>
             <h3>${i.name}</h3>
             <div class="price">R$ ${i.price}</div>
-            <button class="btn" onclick="checkout('${i.id}', '${i.name}', '${i.price}', '${section.link}', '${section.cat}')">COMPRAR</button>
+            <button class="btn" onclick="checkout('${i.id}', '${i.name}', '${i.price}', '${section.link}', '${section.cat}')">COMPRAR AGORA</button>
           </div>
         </div>`;
     });
@@ -246,31 +239,27 @@ function renderShop() {
   startSlideshows();
 }
 
-// Lógica do Slide Automático
 function startSlideshows() {
-  const cards = document.querySelectorAll('.card');
-  
-  cards.forEach(card => {
+  document.querySelectorAll('.card').forEach(card => {
     const images = card.querySelectorAll('.vehicle-img');
     if (images.length <= 1) return;
-
-    let currentIndex = 0;
+    let current = 0;
     setInterval(() => {
-      images[currentIndex].classList.remove('active');
-      currentIndex = (currentIndex + 1) % images.length;
-      images[currentIndex].classList.add('active');
-    }, 3000); // Troca a cada 3 segundos
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+    }, 3500);
   });
 }
 
 async function checkout(id, name, price, discordLink, category) {
-  const userName = prompt("Digite seu Nome no Jogo:");
+  const userName = prompt("Para confirmar, digite seu Nome no Jogo:");
   if (!userName) return;
 
-  const webhookMsg = {
-    username: "DEAD ZONE BOT",
+  const msg = {
+    username: "DEAD ZONE SHOP",
     embeds: [{
-      title: "🔔 NOVO INTERESSE DE COMPRA",
+      title: "🛒 NOVO PEDIDO VIP",
       color: 15241731,
       fields: [
         { name: "👤 Jogador", value: userName, inline: true },
@@ -281,13 +270,14 @@ async function checkout(id, name, price, discordLink, category) {
     }]
   };
 
-  await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(webhookMsg) });
-  
-  const playerMsg = `🛒 **PEDIDO VIP**\n👤 **Nome:** ${userName}\n📦 **Item:** ${name}\n💰 **Valor:** R$ ${price}`;
-  await navigator.clipboard.writeText(playerMsg);
-  
-  alert("Dados enviados aos ADMs! Abrindo o Discord...");
-  window.open(discordLink, '_blank');
+  try {
+    await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(msg) });
+    navigator.clipboard.writeText(`🛒 PEDIDO VIP\n👤 Nome: ${userName}\n📦 Item: ${name}\n💰 Valor: R$ ${price}`);
+    alert("✅ Pedido enviado! Copiamos os detalhes. Basta colar no ticket agora.");
+    window.open(discordLink, '_blank');
+  } catch (e) {
+    alert("Erro ao enviar. Tente novamente.");
+  }
 }
 
 renderShop();
