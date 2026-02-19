@@ -41,7 +41,7 @@
 <body>
 
 <div class="container">
-  <header><h1>DEAD ZONE VIP</h1><p>LOJA COMPLETA E AUTOMATIZADA</p></header>
+  <header><h1>DEAD ZONE VIP</h1><p>LOJA COMPLETA - VALORES ATUALIZADOS</p></header>
   <div class="nav-categories" id="menu-nav"></div>
   <div id="shop"></div>
 </div>
@@ -73,22 +73,22 @@ let activeOrder = null;
 
 const database = [
   {
-    cat: "Helicópteros de Ataque", anchor: "HELIS", link: CHANNELS.HELIS,
+    cat: "Helicópteros de Combate", anchor: "HELIS", link: CHANNELS.HELIS,
     items: [
-      { id: "RFFSHeli_Apache", name: "AH-64 Apache", price: "100,00", img: ["apache1.png", "apache2.png"] },
-      { id: "RFFSHeli_Blackhawk", name: "UH-60 Blackhawk", price: "80,00", img: ["blackhawk1.png"] },
-      { id: "RFFSHeli_CH47", name: "CH-47 Chinook", price: "90,00", img: ["chinook1.png"] },
-      { id: "RFFSHeli_CH53e", name: "CH-53E Super Stallion", price: "95,00", img: ["ch53.png"] }
+      { id: "RFFSHeli_Apache", name: "AH-64 Apache", price: "120,00", img: ["apache1.png"] },
+      { id: "RFFSHeli_Blackhawk", name: "UH-60 Blackhawk", price: "95,00", img: ["blackhawk1.png"] },
+      { id: "RFFSHeli_CH47", name: "CH-47 Chinook", price: "110,00", img: ["chinook1.png"] },
+      { id: "RFFSHeli_CH53e", name: "CH-53E Super Stallion", price: "115,00", img: ["ch53.png"] }
     ]
   },
   {
     cat: "Helicópteros Utilitários", anchor: "UTIL", link: CHANNELS.HELIS,
     items: [
-      { id: "RFFSHeli_Bell429", name: "Bell 429", price: "60,00", img: ["bell1.png"] },
-      { id: "RFFSHeli_AS350", name: "AS350 Esquilo", price: "55,00", img: ["esquilo1.png"] },
-      { id: "RFFSHeli_EC135", name: "EC135", price: "55,00", img: ["ec135.png"] },
-      { id: "RFFSHeli_Bo105m", name: "Bo105m", price: "45,00", img: ["bo105.png"] },
-      { id: "RFFSHeli_Ka26", name: "Ka-26", price: "40,00", img: ["ka26.png"] }
+      { id: "RFFSHeli_Bell429", name: "Bell 429", price: "85,00", img: ["bell1.png"] },
+      { id: "RFFSHeli_AS350", name: "AS350 Esquilo", price: "80,00", img: ["esquilo1.png"] },
+      { id: "RFFSHeli_EC135", name: "EC135", price: "80,00", img: ["ec135.png"] },
+      { id: "RFFSHeli_Bo105m", name: "Bo105m", price: "80,00", img: ["bo105.png"] },
+      { id: "RFFSHeli_Ka26", name: "Ka-26", price: "80,00", img: ["ka26.png"] }
     ]
   },
   {
@@ -127,10 +127,9 @@ function renderShop() {
     div.id = section.anchor;
     div.innerHTML = `<h2 style="font-family:Orbitron; margin: 30px 0; color:var(--accent); border-left: 5px solid var(--accent); padding-left: 15px;">${section.cat}</h2><div class="grid">`;
     section.items.forEach(i => {
-      const imgs = i.img.length > 0 ? i.img : ["https://via.placeholder.com/400x200/111318/e8a020?text=AGUARDANDO+FOTO"];
       div.querySelector('.grid').innerHTML += `
         <div class="card">
-          <div class="card-img">${imgs.map((src,idx) => `<img src="${src}" class="vehicle-img ${idx===0?'active':''}">`).join('')}</div>
+          <div class="card-img"><img src="${i.img[0]}" class="vehicle-img active"></div>
           <div class="card-body">
             <span style="font-size:9px; color:var(--accent); font-family:Orbitron;">ID: ${i.id}</span>
             <h3>${i.name}</h3><div class="price">R$ ${i.price}</div>
@@ -139,20 +138,6 @@ function renderShop() {
         </div>`;
     });
     shop.appendChild(div);
-  });
-  startSlideshows();
-}
-
-function startSlideshows() {
-  document.querySelectorAll('.card').forEach(card => {
-    const imgs = card.querySelectorAll('.vehicle-img');
-    if (imgs.length <= 1) return;
-    let curr = 0;
-    setInterval(() => {
-      imgs[curr].classList.remove('active');
-      curr = (curr + 1) % imgs.length;
-      imgs[curr].classList.add('active');
-    }, 3000);
   });
 }
 
