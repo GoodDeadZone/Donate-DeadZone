@@ -138,7 +138,9 @@
 </div>
 
 <script>
-// CONFIGURAÇÃO DOS CANAIS
+// CONFIGURAÇÃO DOS CANAIS E WEBHOOK
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1473893978809307320/NwHArN7ef1WWYLoCxthPK7hZRIhlku4_at6qI80IJpUD6kWXuL9jbSswMGRXmvoxEtF_";
+
 const DISCORD_LINKS = {
   HELIS: "https://discord.com/channels/1362584015273595183/1473882714716504095",
   CARROS: "https://discord.com/channels/1362584015273595183/1473882265615597618",
@@ -209,20 +211,58 @@ function renderShop() {
           <span class="id-badge">${i.id}</span>
           <h3>${i.name}</h3>
           <div class="price">R$ ${i.price}</div>
-          <button class="btn" onclick="checkout('${i.id}', '${i.name}', '${i.price}', '${section.link}')">GERAR PEDIDO</button>
+          <button class="btn" onclick="checkout('${i.id}', '${i.name}', '${i.price}', '${section.link}', '${section.cat}')">COMPRAR</button>
         </div>
       </div>`).join('')}</div>`;
     shop.appendChild(div);
   });
 }
 
-function checkout(id, name, price, discordLink) {
-  const msg = `━━━━━━━━━━━━━━━━━━━━━━\n🚀 **NOVO PEDIDO VIP - DEAD ZONE**\n━━━━━━━━━━━━━━━━━━━━━━\n📦 **ITEM:** ${name}\n🔑 **ID:** ${id}\n💰 **VALOR:** R$ ${price}\n\n✅ *Aguardando confirmação via Ticket.*`;
+async function checkout(id, name, price, discordLink, category) {
+  const userName = prompt("Para continuar, digite seu Nome no Jogo ou seu Discord:");
   
-  navigator.clipboard.writeText(msg).then(() => {
-    alert("✅ PEDIDO COPIADO!\n\nAgora vou abrir o canal de Ticket correto. Basta colar (CTRL+V) e enviar.");
+  if (!userName) {
+    alert("Você precisa informar seu nome para realizar o pedido.");
+    return;
+  }
+
+  // Prepara a mensagem para o Webhook (ADM)
+  const webhookMsg = {
+    username: "LOJA DEAD ZONE",
+    embeds: [{
+      title: "🔔 NOVO PEDIDO RECEBIDO",
+      color: 15241731, // Cor neon
+      fields: [
+        { name: "👤 Comprador", value: userName, inline: true },
+        { name: "🚁 Item", value: name, inline: true },
+        { name: "🔑 ID", value: id, inline: true },
+        { name: "💰 Valor", value: "R$ " + price, inline: true },
+        { name: "📂 Categoria", value: category, inline: true }
+      ],
+      footer: { text: "Dead Zone Automation System" },
+      timestamp: new Date()
+    }]
+  };
+
+  // Envia para o seu Discord via Webhook
+  try {
+    await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(webhookMsg)
+    });
+
+    // Copia a mensagem para o player colar no ticket
+    const playerMsg = `🛒 **PEDIDO VIP**\n👤 **Nome:** ${userName}\n📦 **Item:** ${name}\n💰 **Valor:** R$ ${price}\n\n✅ *Aguardando instruções para o PIX no ticket.*`;
+    await navigator.clipboard.writeText(playerMsg);
+
+    alert("✅ PEDIDO ENVIADO AOS ADMS!\n\nSeus dados foram enviados. Vou abrir o canal de Ticket agora. Basta colar (CTRL+V) para confirmar.");
     window.open(discordLink, '_blank');
-  });
+
+  } catch (error) {
+    alert("Erro ao enviar pedido. Tente novamente.");
+    console.error(error);
+  }
 }
 
 renderShop();
