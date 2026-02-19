@@ -1,244 +1,251 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[BR] RIO DEAD ZONE — Sobrevivência Deer Isle</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[BR] DEAD_ZONE - SEASON 01</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
 
-  :root {
-    --bg: #06090f; /* Azul quase preto */
-    --surface: #0d121a; /* Cinza azulado profundo */
-    --border: #1a2433; /* Bordas metálicas frias */
-    --accent: #4ecdc4; /* Ciano/Turquesa fosco (Sobriedade) */
-    --accent-dark: #2a7a74;
-    --text: #aab8c2; /* Texto acinzentado */
-    --green: #45b07a;
-    --discord: #5865f2;
-  }
+        :root {
+            --bg: #06090f; 
+            --surface: #0d121a; 
+            --border: #1a2433; 
+            --accent: #4ecdc4; 
+            --accent-dark: #2a7a74;
+            --text: #aab8c2; 
+            --white: #ffffff;
+            --green: #45b07a;
+            --discord: #5865f2;
+        }
 
-  * { margin:0; padding:0; box-sizing:border-box; scroll-behavior: smooth; }
+        * { margin:0; padding:0; box-sizing:border-box; scroll-behavior: smooth; }
 
-  body { 
-    background: var(--bg); 
-    color: var(--text); 
-    font-family: 'Rajdhani', sans-serif; 
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: 'Rajdhani', sans-serif; 
+            line-height: 1.6;
+        }
 
-  /* --- NAVEGAÇÃO --- */
-  nav {
-    background: rgba(6, 9, 15, 0.9);
-    border-bottom: 1px solid var(--border);
-    padding: 15px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(15px);
-  }
+        /* --- NAVEGAÇÃO --- */
+        nav {
+            background: rgba(6, 9, 15, 0.95);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+        }
 
-  .logo { font-family: 'Orbitron'; color: var(--accent); font-weight: 900; font-size: 1.4rem; text-decoration: none; letter-spacing: 2px; }
+        .logo { font-family: 'Orbitron'; color: var(--accent); font-weight: 900; font-size: 1.2rem; text-decoration: none; letter-spacing: 2px; }
 
-  .nav-links a { 
-    text-decoration: none; 
-    color: var(--text); 
-    font-family: 'Orbitron'; 
-    font-size: 0.75rem; 
-    text-transform: uppercase;
-    margin-left: 20px;
-    transition: 0.3s;
-  }
-  .nav-links a:hover { color: var(--accent); }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text); 
+            font-family: 'Orbitron'; 
+            font-size: 0.7rem; 
+            text-transform: uppercase;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
 
-  /* --- HERO SECTION --- */
-  .hero {
-    height: 85vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    /* Gradiente que simula neblina de Deer Isle */
-    background: linear-gradient(rgba(6, 9, 15, 0.4), rgba(6, 9, 15, 1)), url('https://i.imgur.com/vH6QeM8.jpg'); 
-    background-size: cover;
-    background-position: center;
-    padding: 20px;
-  }
+        /* --- HERO --- */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(6, 9, 15, 0.6), rgba(6, 9, 15, 1)), url('https://i.imgur.com/vH6QeM8.jpg'); 
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+        }
 
-  .hero h1 { 
-    font-family: 'Orbitron'; 
-    font-size: clamp(2.5rem, 8vw, 4.5rem); 
-    color: #fff; 
-    margin-bottom: 5px;
-    letter-spacing: 12px;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  }
+        .hero h1 { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 4rem); color: var(--white); letter-spacing: 10px; margin-bottom: 5px; }
+        .hero h2 { font-family: 'Orbitron'; color: var(--accent); font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 25px; }
 
-  .hero p { 
-    font-family: 'Orbitron'; 
-    letter-spacing: 6px; 
-    color: var(--accent); 
-    font-size: 0.9rem;
-    margin-bottom: 30px;
-    opacity: 0.8;
-  }
+        /* --- INFO BOX --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        
+        .info-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 20px; 
+            margin-top: -50px;
+        }
 
-  /* --- SEÇÕES SÓBRIAS --- */
-  section { padding: 80px 10% 40px; }
-  h2.section-title { 
-    font-family: 'Orbitron'; 
-    color: #fff; 
-    margin-bottom: 40px; 
-    border-left: 3px solid var(--accent); 
-    padding-left: 15px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 1.5rem;
-  }
+        .info-card { 
+            background: var(--surface); 
+            border: 1px solid var(--border); 
+            padding: 20px; 
+            text-align: center;
+            border-radius: 4px;
+        }
+        .info-card label { display: block; font-family: 'Orbitron'; font-size: 0.6rem; color: var(--accent); margin-bottom: 5px; }
+        .info-card p { font-size: 1.2rem; color: var(--white); font-weight: bold; }
 
-  .info-box { 
-    background: var(--surface); 
-    border: 1px solid var(--border); 
-    padding: 30px; 
-    border-radius: 4px; /* Menos arredondado para parecer mais militar/sóbrio */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  .info-item label { display: block; font-family: 'Orbitron'; color: var(--accent); font-size: 0.7rem; margin-bottom: 5px; }
-  .info-item p { font-size: 1.3rem; font-weight: 500; color: #fff; }
+        /* --- SEÇÕES --- */
+        section { padding: 60px 0; }
+        h3.title { font-family: 'Orbitron'; color: var(--white); margin-bottom: 30px; border-left: 3px solid var(--accent); padding-left: 15px; text-transform: uppercase; }
 
-  /* --- CARDS DA LOJA --- */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .card { 
-    background: var(--surface); 
-    border: 1px solid var(--border); 
-    overflow: hidden; 
-    transition: 0.3s;
-  }
-  .card:hover { border-color: var(--accent); background: #111822; }
-  .card-img { width: 100%; height: 160px; background: #000; filter: grayscale(40%); }
-  .card-body { padding: 20px; }
-  .price { font-size: 22px; color: var(--accent); font-family: 'Orbitron'; margin: 10px 0; }
+        /* --- LOJA --- */
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        
+        .item-card { 
+            background: var(--surface); 
+            border: 1px solid var(--border); 
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        
+        .item-img { width: 100%; height: 180px; background: #000; overflow: hidden; position: relative; }
+        .item-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        
+        .item-content { padding: 20px; flex-grow: 1; }
+        .item-name { font-family: 'Orbitron'; font-size: 1.1rem; color: var(--white); margin-bottom: 10px; }
+        .item-price { font-family: 'Orbitron'; font-size: 1.5rem; color: var(--accent); margin-bottom: 20px; }
 
-  /* --- BOTÕES --- */
-  .btn { 
-    background: transparent;
-    border: 1px solid var(--accent);
-    padding: 12px 25px;
-    color: var(--accent);
-    font-family: 'Orbitron';
-    font-size: 0.8rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.3s;
-    text-decoration: none;
-    display: inline-block;
-  }
-  .btn:hover { background: var(--accent); color: #000; }
-  .btn-discord { background: var(--discord); border: none; color: #fff; }
+        /* --- BOTÕES --- */
+        .btn { 
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-family: 'Orbitron';
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .btn:hover { background: var(--accent); color: var(--bg); }
+        .btn-discord { background: var(--discord); border: none; color: white; margin-top: 10px; }
 
-  /* --- MODAL --- */
-  #payment-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
-  .modal-content { background: var(--surface); border: 1px solid var(--accent); padding: 30px; max-width: 400px; width: 90%; text-align: center; }
+        /* --- MODAL --- */
+        #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; justify-content:center; align-items:center; }
+        .modal-box { background: var(--surface); border: 1px solid var(--accent); padding: 30px; max-width: 400px; width: 90%; text-align: center; }
 
-  footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: #444; font-size: 0.8rem; }
-</style>
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: #444; font-size: 0.8rem; margin-top: 50px; }
+    </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="logo">[BR] RIO DEAD ZONE</a>
-  <div class="nav-links">
-    <a href="#info">Servidor</a>
-    <a href="#regras">Regras</a>
-    <a href="#loja">Loja</a>
-    <a href="https://discord.gg/WWqFWmXfX6" target="_blank" style="color: var(--discord);">Discord</a>
-  </div>
+    <a href="#" class="logo">[BR] DEAD_ZONE</a>
+    <div class="nav-links">
+        <a href="#info">Servidor</a>
+        <a href="#loja">Loja</a>
+        <a href="https://discord.gg/WWqFWmXfX6" target="_blank">Discord</a>
+    </div>
 </nav>
 
-<section id="home" class="hero">
-  <h1>RIO DEAD ZONE</h1>
-  <p>DEER ISLE SURVIVAL</p>
-  <div>
-    <a href="#loja" class="btn">Equipamentos</a>
-    <a href="https://discord.gg/WWqFWmXfX6" target="_blank" class="btn btn-discord" style="margin-left: 10px;">Comunidade</a>
-  </div>
-</section>
-
-<section id="info">
-  <h2 class="section-title">Status do Sistema</h2>
-  <div class="info-box">
-    <div class="info-item"><label>ENDEREÇO IP</label><p>188.255.171.140</p></div>
-    <div class="info-item"><label>PORTA</label><p>2312</p></div>
-    <div class="info-item"><label>LOCALIZAÇÃO</label><p>Deer Isle</p></div>
-    <div class="info-item"><label>MODO</label><p>Hardcore Survival</p></div>
-  </div>
-</section>
-
-<section id="regras">
-  <h2 class="section-title">Diretrizes de Campo</h2>
-  <div class="grid">
-    <div style="background: var(--surface); padding: 20px; border-left: 2px solid var(--accent);">
-      <h4 style="color: #fff; font-family: Orbitron; margin-bottom: 10px;">Zonas Seguras</h4>
-      <p style="font-size: 0.9rem;">Áreas de comércio são estritamente monitoradas. Hostilidade resultará em expulsão.</p>
+<div class="hero">
+    <h1>DEAD_ZONE</h1>
+    <h2>SEASON 01 - DEER ISLE</h2>
+    <div style="display: flex; gap: 15px;">
+        <a href="#loja" class="btn" style="width: 180px;">Ver Loja</a>
+        <a href="https://discord.gg/WWqFWmXfX6" target="_blank" class="btn btn-discord" style="width: 180px; margin-top:0;">Discord</a>
     </div>
-    <div style="background: var(--surface); padding: 20px; border-left: 2px solid var(--accent);">
-      <h4 style="color: #fff; font-family: Orbitron; margin-bottom: 10px;">Raids</h4>
-      <p style="font-size: 0.9rem;">Operações de invasão autorizadas apenas em períodos de guerra (Finais de Semana).</p>
-    </div>
-  </div>
-</section>
+</div>
 
-<section id="loja">
-  <h2 class="section-title">Suprimentos VIP</h2>
-  <div class="grid" id="shop-items">
+<div class="container">
+    <div id="info" class="info-grid">
+        <div class="info-card"><label>IP DO SERVIDOR</label><p>172.84.94.151</p></div>
+        <div class="info-card"><label>PORTA</label><p>2372</p></div>
+        <div class="info-card"><label>MAPA</label><p>Deer Isle</p></div>
+        <div class="info-card"><label>SEASON</label><p>01</p></div>
     </div>
-</section>
 
-<div id="payment-modal">
-  <div class="modal-content">
-    <h3 style="color: var(--accent); font-family: Orbitron; margin-bottom: 20px;">TRANSFERÊNCIA PIX</h3>
-    <img src="pix.png" style="width: 200px; background: #fff; padding: 10px; margin-bottom: 20px;">
-    <p style="font-size: 0.8rem; color: #fff; margin-bottom: 5px;">CHAVE (CPF): 123.982.156.52</p>
-    <p style="font-size: 0.8rem; color: var(--accent);">BENEFICIÁRIO: Alexandre Rodrigues Prates</p>
-    <button class="btn" style="width: 100%; margin-top: 20px;" onclick="closeModal()">Fechar</button>
-  </div>
+    <section id="loja">
+        <h3 class="title">Suprimentos e Veículos VIP</h3>
+        <div class="shop-grid" id="shop-container">
+            </div>
+    </section>
+</div>
+
+<div id="modal">
+    <div class="modal-box">
+        <h3 style="font-family: Orbitron; color: var(--accent); margin-bottom: 15px;">PAGAMENTO PIX</h3>
+        <div style="background: white; padding: 10px; display: inline-block; margin-bottom: 15px;">
+            <img src="pix.png" alt="QR Code" style="width: 200px; height: 200px;">
+        </div>
+        <p style="color: white; font-size: 0.9rem;">CHAVE (CPF): 123.982.156.52</p>
+        <p style="color: var(--accent); font-size: 0.8rem; margin-bottom: 20px;">Alexandre Rodrigues Prates</p>
+        <button class="btn" onclick="closeModal()">Fechar</button>
+    </div>
 </div>
 
 <footer>
-  <p>[BR] RIO DEAD ZONE — 2026. Todos os direitos reservados à administração.</p>
+    [BR] DEAD_ZONE - SEASON 01 | DEER ISLE SURVIVAL © 2026
 </footer>
 
 <script>
-  const shopData = [
-    { name: "AH-64 Apache", price: "120,00", img: "apache1.png" },
-    { name: "UH-60 Blackhawk", price: "95,00", img: "blackhawk1.png" },
-    { name: "AS350 Esquilo", price: "80,00", img: "esquilo1.png" },
-    { name: "BTR-80 Camo", price: "120,00", img: "btr1.png" }
-  ];
+    const WEBHOOK_URL = "https://discord.com/api/webhooks/1473893978809307320/NwHArN7ef1WWYLoCxthPK7hZRIhlku4_at6qI80IJpUD6kWXuL9jbSswMGRXmvoxEtF_";
 
-  const shopGrid = document.getElementById('shop-items');
-  shopData.forEach(item => {
-    shopGrid.innerHTML += `
-      <div class="card">
-        <div class="card-img"></div>
-        <div class="card-body">
-          <h4 style="color:#fff; font-family:Orbitron;">${item.name}</h4>
-          <p class="price">R$ ${item.price}</p>
-          <button class="btn" style="width:100%" onclick="openCheckout()">Adquirir</button>
-        </div>
-      </div>
-    `;
-  });
+    const items = [
+        { name: "AH-64 Apache", price: "120,00", id: "RFFSHeli_Apache" },
+        { name: "UH-60 Blackhawk", price: "95,00", id: "RFFSHeli_Blackhawk" },
+        { name: "AS350 Esquilo", price: "80,00", id: "RFFSHeli_AS350" },
+        { name: "BTR-80 Camuflado", price: "120,00", id: "BTR80_Camo" },
+        { name: "Bunker Subterrâneo", price: "500,00", id: "Base_Bunker" },
+        { name: "Kit Construção Full", price: "50,00", id: "Kit_Base_01" }
+    ];
 
-  function openCheckout() { document.getElementById('payment-modal').style.display = 'flex'; }
-  function closeModal() { document.getElementById('payment-modal').style.display = 'none'; }
+    const container = document.getElementById('shop-container');
+
+    items.forEach(item => {
+        container.innerHTML += `
+            <div class="item-card">
+                <div class="item-img"></div>
+                <div class="item-content">
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-price">R$ ${item.price}</div>
+                    <button class="btn" onclick="buy('${item.name}', '${item.price}')">Adquirir</button>
+                </div>
+            </div>
+        `;
+    });
+
+    function buy(name, price) {
+        const player = prompt("Digite seu Nome/SteamID para o pedido:");
+        if(!player) return;
+
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                embeds: [{
+                    title: "Novo Pedido de Compra",
+                    color: 5175492,
+                    fields: [
+                        { name: "Jogador", value: player, inline: true },
+                        { name: "Item", value: name, inline: true },
+                        { name: "Valor", value: "R$ " + price, inline: true }
+                    ],
+                    footer: { text: "DEAD_ZONE SEASON 01" }
+                }]
+            })
+        });
+
+        document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
 </script>
 
 </body>
