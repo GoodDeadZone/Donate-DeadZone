@@ -125,9 +125,9 @@
         <h2 style="font-family:Orbitron; color:white; margin-bottom:30px; border-left: 4px solid var(--accent); padding-left:15px;">LOJA DE SUPRIMENTOS</h2>
         <div class="shop-filter">
             <button class="filter-btn active" onclick="filterShop('todos')">Todos</button>
-            <button class="filter-btn" onclick="filterShop('helis')">Aeronaves</button>
-            <button class="filter-btn" onclick="filterShop('carros')">Veículos</button>
+            <button class="filter-btn" onclick="filterShop('carros')">Carros e Utilitários</button>
             <button class="filter-btn" onclick="filterShop('militar')">Blindados</button>
+            <button class="filter-btn" onclick="filterShop('helis')">Helicópteros</button>
         </div>
         <div class="shop-grid" id="shop-container"></div>
     </section>
@@ -153,16 +153,35 @@
     const WEBHOOK_URL = "https://discord.com/api/webhooks/1473893978809307320/NwHArN7ef1WWYLoCxthPK7hZRIhlku4_at6qI80IJpUD6kWXuL9jbSswMGRXmvoxEtF_";
 
     const catalog = [
-        { name: "AH-64 Apache", price: "120,00", cat: "helis" },
-        { name: "UH-60 Blackhawk", price: "95,00", cat: "helis" },
-        { name: "EC-135 (Várias Cores)", price: "85,00", cat: "helis" },
-        { name: "Lamborghini Huracán", price: "150,00", cat: "carros" },
-        { name: "Nissan GTR Limit", price: "110,00", cat: "carros" },
-        { name: "Ford Raptor Scorpio", price: "95,00", cat: "carros" },
-        { name: "Typhoon-K Blindado", price: "180,00", cat: "militar" },
-        { name: "BTR-80 Camo", price: "120,00", cat: "militar" },
-        { name: "Bunker Subterrâneo", price: "500,00", cat: "militar" },
-        { name: "Lancha JMC STAG", price: "70,00", cat: "carros" }
+        /* CARROS E UTILITÁRIOS */
+        { name: "Quadriciclo jmc_atv (Cores)", price: "50,00", cat: "carros" },
+        { name: "Niva 028 / Urban", price: "50,00", cat: "carros" },
+        { name: "UAZ 469 (Standard / OpenTop)", price: "55,00", cat: "carros" },
+        { name: "UAZ 469 Expedition", price: "60,00", cat: "carros" },
+        { name: "MotorHome (Base Móvel)", price: "70,00", cat: "carros" },
+        { name: "MBM CanAm", price: "75,00", cat: "carros" },
+        { name: "Mercedes V250d 19 (Padrão e Skins)", price: "115,00", cat: "carros" },
+        { name: "Lamborghini Urus (Black/Pink/Standard)", price: "120,00", cat: "carros" },
+
+        /* BLINDADOS(Em Breve) */
+        { name: "Humvee M1151A1", price: "80,00", cat: "militar" },
+        { name: "Insurgent SUV", price: "100,00", cat: "militar" },
+        { name: "Typhoon K 53949", price: "110,00", cat: "militar" },
+        { name: "MBM Apocalypse Truck", price: "110,00", cat: "militar" },
+
+        /* HELICÓPTEROS */
+        { name: "RFFSHeli R22 (Todas as Cores)", price: "80,00", cat: "helis" },
+        { name: "RFFSHeli Ka26", price: "95,00", cat: "helis" },
+        { name: "RFFSHeli LittleBird", price: "110,00", cat: "helis" },
+        { name: "RFFSHeli Mi2", price: "120,00", cat: "helis" },
+        { name: "RFFSHeli EC135", price: "135,00", cat: "helis" },
+        { name: "RFFSHeli Bell429", price: "145,00", cat: "helis" },
+        { name: "RFFSHeli Bo105m", price: "155,00", cat: "helis" },
+        { name: "RFFSHeli AS350 / S76", price: "165,00", cat: "helis" },
+        { name: "RFFSHeli UH1H", price: "180,00", cat: "helis" },
+        { name: "RFFSHeli Blackhawk", price: "185,00", cat: "helis" },
+        { name: "RFFSHeli CH47 / CH53e", price: "185,00", cat: "helis" },
+        { name: "RFFSHeli Apache", price: "190,00", cat: "helis" }
     ];
 
     function renderShop(filter = 'todos') {
